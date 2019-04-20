@@ -4,7 +4,7 @@
 #
 Name     : todoist
 Version  : 7.0.16
-Release  : 4
+Release  : 5
 URL      : https://github.com/Doist/todoist-python/archive/7.0.16.tar.gz
 Source0  : https://github.com/Doist/todoist-python/archive/7.0.16.tar.gz
 Summary  : No detailed summary available
