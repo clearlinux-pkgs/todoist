@@ -4,10 +4,10 @@
 #
 Name     : todoist
 Version  : 7.0.16
-Release  : 8
+Release  : 9
 URL      : https://github.com/Doist/todoist-python/archive/7.0.16.tar.gz
 Source0  : https://github.com/Doist/todoist-python/archive/7.0.16.tar.gz
-Summary  : No detailed summary available
+Summary  : Todoist CLI Client, written in Golang.
 Group    : Development/Tools
 License  : MIT
 Requires: todoist-license = %{version}-%{release}
@@ -54,14 +54,20 @@ python3 components for the todoist package.
 
 %prep
 %setup -q -n todoist-python-7.0.16
+cd %{_builddir}/todoist-python-7.0.16
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-export LANG=C
-export SOURCE_DATE_EPOCH=1555344502
-export LDFLAGS="${LDFLAGS} -fno-lto"
+export LANG=C.UTF-8
+export SOURCE_DATE_EPOCH=1582909520
+# -Werror is for werrorists
+export GCC_IGNORE_WERROR=1
+export CFLAGS="$CFLAGS -fno-lto "
+export FCFLAGS="$CFLAGS -fno-lto "
+export FFLAGS="$CFLAGS -fno-lto "
+export CXXFLAGS="$CXXFLAGS -fno-lto "
 export MAKEFLAGS=%{?_smp_mflags}
 python3 setup.py build
 
@@ -69,7 +75,7 @@ python3 setup.py build
 export MAKEFLAGS=%{?_smp_mflags}
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/todoist
-cp LICENSE %{buildroot}/usr/share/package-licenses/todoist/LICENSE
+cp %{_builddir}/todoist-python-7.0.16/LICENSE %{buildroot}/usr/share/package-licenses/todoist/201caf6ea040202bddd513172818ca2c3933aa33
 python3 -tt setup.py build  install --root=%{buildroot}
 echo ----[ mark ]----
 cat %{buildroot}/usr/lib/python3*/site-packages/*/requires.txt || :
@@ -80,7 +86,7 @@ echo ----[ mark ]----
 
 %files license
 %defattr(0644,root,root,0755)
-/usr/share/package-licenses/todoist/LICENSE
+/usr/share/package-licenses/todoist/201caf6ea040202bddd513172818ca2c3933aa33
 
 %files python
 %defattr(-,root,root,-)
