@@ -4,7 +4,7 @@
 #
 Name     : todoist
 Version  : 7.0.16
-Release  : 9
+Release  : 10
 URL      : https://github.com/Doist/todoist-python/archive/7.0.16.tar.gz
 Source0  : https://github.com/Doist/todoist-python/archive/7.0.16.tar.gz
 Summary  : Todoist CLI Client, written in Golang.
